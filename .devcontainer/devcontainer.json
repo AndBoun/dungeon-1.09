@@ -1,0 +1,20 @@
+{
+    "name": "Fedora Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.makefile-tools"
+            ]
+        }
+    },
+    
+    "postCreateCommand": "cp -r .rlg327 /root/.rlg327 && make clean && make && echo 'Container setup complete!'"    
+}
