@@ -58,6 +58,8 @@ class ui {
 
         static void printDistanceMap(const std::array<std::array<int, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &distanceMap);
 
+        static int render_scrollable_list(int line_start, int line_end, int scroll_idx, std::vector<std::string> &list);
+
 
         static void render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &grid, bool is_fog_on = false);
         static void render_game_over(Dungeon &d);
