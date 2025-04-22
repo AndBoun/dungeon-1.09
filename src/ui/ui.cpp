@@ -116,6 +116,9 @@ void ui::render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON
 // Render game over message
 void ui::render_game_over(Dungeon &d) {
     // clear();
+
+    clear_status_1();
+    clear_status_2();
     
     render_grid(d, d.getGrid()); // Render the grid without fog
     
@@ -235,6 +238,11 @@ int ui::get_input(Dungeon &d) {
             case 'm': // Monster list
                 result = 0; // no movement, run loop again
                 handle_monster_list(d);
+                break;
+
+            case 'L': // Inspect monster
+                result = 0; // no movement, run loop again
+                selectMonster(d);
                 break;
                 
             default:

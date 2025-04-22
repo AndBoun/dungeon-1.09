@@ -49,6 +49,10 @@ class ui {
         template<typename... Args>
         static void render_status_2(int color_id, const char *format, Args&&... args) {render_centered_line(24, color_id, format, std::forward<Args>(args)...);}
 
+        static void clear_top_bar() {render_top_bar(COLOR_DEFAULT_ID, "");}
+        static void clear_status_1() {render_status_1(COLOR_DEFAULT_ID, "");}
+        static void clear_status_2() {render_status_2(COLOR_DEFAULT_ID, "");}
+
 
         static void render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &grid, bool is_fog_on = false);
         static void render_game_over(Dungeon &d);
@@ -57,6 +61,8 @@ class ui {
         // Input handling
         static int get_input(Dungeon &d);
         static int handle_monster_list(Dungeon &d);
+        static bool selectMonster(Dungeon &d);
+        static bool displayMonsterInfo(Dungeon &d, Point p);
 
         static void init_NPC_colors(std::vector<NPC*> npcs);
         static void init_item_colors(std::vector<Item*> items);

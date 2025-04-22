@@ -95,6 +95,7 @@ bool ui::teleport(Dungeon &d){
                 y++;
                 break;
             
+            case 27:
             case 'q':
                 if (d.getFogStatus()) {
                     render_grid(d, d.getFog(), true /* fog is on */);
