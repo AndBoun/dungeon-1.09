@@ -27,6 +27,9 @@ bool ui::teleport(Dungeon &d){
 
         timeout(-1);
         int input = getch();
+        // clear_top_bar(false);
+        render_top_bar(COLOR_PLAYER_ID, "In teleport mode, press 'g' to teleport, 'r' to randomize, or 'q' to quit");
+
 
         switch (input){
             case 'g':

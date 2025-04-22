@@ -28,13 +28,19 @@ void ui::render_centered_line(int line, int color_id, const char *format, ...) {
     refresh();
 }
 
-void ui::render_pc_status(Dungeon &d) {
+void ui::clear_bar(int line, bool refreshImmediately){
+    move(line, 0);
+    clrtoeol();
+    if (refreshImmediately) refresh();
+}
+
+void ui::render_pc_status(const Dungeon &d) {
     render_status_1(
         COLOR_DEFAULT_ID,
         "Position: (%d, %d)    HP: %d    Number of Monsters: %d",
-        d.getPC().getPosition().getX(),
-        d.getPC().getPosition().getY(),
-        d.getPC().hp,
-        d.getNumMonsters()
+        d.pc.position.getX(),
+        d.pc.position.getY(),
+        d.pc.hp,
+        d.numMonsterAlive
     );
 }

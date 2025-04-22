@@ -7,6 +7,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <ui/ui.hpp>
+#include <pathfinding/Dijkstras.hpp>
 
 Dungeon::Dungeon() {
     npcDescList = NPCDescription::NPCParser();
@@ -86,7 +87,21 @@ int Dungeon::startGameplay(int numNPCS){
         pq_insert(pq, i + 1, NULL, 0); // all entities start at time 0
     }
 
-    // render_grid(d); // Render the dungeon
+    Dijkstras::createDistanceMap(
+        *this, 
+        modifyNonTunnelingDistanceMap(),
+        getPC().getPosition().getX(), 
+        getPC().getPosition().getY(), 
+        false
+    );
+
+    Dijkstras::createDistanceMap(
+        *this, 
+        modifyTunnelingDistanceMap(),
+        getPC().getPosition().getX(), 
+        getPC().getPosition().getY(), 
+        true
+    );
 
     while (getPC().isAlive() && numMonsterAlive > 0) {
 
@@ -98,7 +113,7 @@ int Dungeon::startGameplay(int numNPCS){
         if (entity_id == PLAYER_ID) { // Player's turn
 
             update_fog_grid(); // Update the fog of war
-            ui::render_pc_status(*this); // Render the player's status
+            // ui::render_pc_status(*this); // Render the player's status
         
             if (getFogStatus()) {
                 ui::render_grid((*this), getFog(), true); // Render the fog grid
@@ -110,7 +125,6 @@ int Dungeon::startGameplay(int numNPCS){
                 return -2;
             }
 
-        
             next_time = current_time + calculateTiming(pc.getSpeed());
         } else {
             // Check if the entity is alive, if not, skip

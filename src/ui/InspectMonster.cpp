@@ -13,17 +13,29 @@ bool ui::displayMonsterInfo(Dungeon &d, Point p){
     clear();    
     std::string desc = d.npcs[npc_id]->desc;
 
-    mvprintw(1, 0, "Name: %s", d.npcs[npc_id]->name.c_str());
-    mvprintw(2, 0, "Symbol: %c", d.npcs[npc_id]->symbol);
-    mvprintw(3, 0, "HP: %d", d.npcs[npc_id]->hp);
-    mvprintw(4, 0, "Speed: %d", d.npcs[npc_id]->speed);
-    mvprintw(5, 0, "Position: (%d, %d)", p.getX(), p.getY());
+    render_top_bar(COLOR_PLAYER_ID, "Viewing Monster Info, press 'esc' or 'q' to exit");
+    mvprintw(2, 0, "Name: %s", d.npcs[npc_id]->name.c_str());
+    mvprintw(3, 0, "Symbol: %c", d.npcs[npc_id]->symbol);
+    mvprintw(4, 0, "HP: %d", d.npcs[npc_id]->hp);
+    mvprintw(5, 0, "Speed: %d", d.npcs[npc_id]->speed);
+    mvprintw(6, 0, "Position: (%d, %d)", p.getX(), p.getY());
+
+    std::string abilities;
+    int desc_id = d.npcs[npc_id]->descID;
+    for (size_t i = 0; i < d.npcDescList[desc_id].abil.size(); i++){
+        if (i == 0) {
+            abilities += d.npcDescList[desc_id].abil[i];
+        } else {
+            abilities += ", " + d.npcDescList[desc_id].abil[i];
+        }
+    }
+    mvprintw(7, 0, "Abilities: %s", abilities.c_str());
 
     Dice dice = d.npcs[npc_id]->dice_dam;
-    mvprintw(6, 0, "Damage: %d+%dd%d", dice.base, dice.numDice, dice.numSides);
-    mvprintw(7, 0, "Rarity: %d", d.npcs[npc_id]->rrty);
+    mvprintw(8, 0, "Damage: %d+%dd%d", dice.base, dice.numDice, dice.numSides);
+    mvprintw(9, 0, "Rarity: %d", d.npcs[npc_id]->rrty);
 
-    int y_pos = 9;
+    int y_pos = 11;
 
     // Process description text into lines
     std::string current_line;
@@ -61,6 +73,13 @@ bool ui::displayMonsterInfo(Dungeon &d, Point p){
             break;
         }
 
+        if (input == 'Q'){
+            destroy_ncurses();
+            printf("Game terminated by user\n");
+            exit(0);
+            break;
+        }
+
     }
 
 
@@ -88,6 +107,7 @@ bool ui::selectMonster(Dungeon &d){
 
         timeout(-1);
         int input = getch();
+        render_top_bar(COLOR_PLAYER_ID, "In monster selection mode, press 't' to inspect, or 'q' to cancel");
 
         switch (input){
             case 't':

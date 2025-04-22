@@ -37,7 +37,7 @@ class ui {
         
         // Rendering status methods
         static void render_centered_line(int line, int color_id, const char *format, ...);
-        static void render_pc_status(Dungeon &d);
+        static void render_pc_status(const Dungeon &d);
 
         // Render status bars overloads
         template<typename... Args>
@@ -48,10 +48,15 @@ class ui {
 
         template<typename... Args>
         static void render_status_2(int color_id, const char *format, Args&&... args) {render_centered_line(24, color_id, format, std::forward<Args>(args)...);}
+        
 
-        static void clear_top_bar() {render_top_bar(COLOR_DEFAULT_ID, "");}
-        static void clear_status_1() {render_status_1(COLOR_DEFAULT_ID, "");}
-        static void clear_status_2() {render_status_2(COLOR_DEFAULT_ID, "");}
+        // Clear status bars overloads
+        static void clear_bar(int line, bool refreshImmediately = true);
+        static void clear_top_bar(bool refreshImmediately = true) {clear_bar(0, refreshImmediately);}
+        static void clear_status_1(bool refreshImmediately = true) {clear_bar(23, refreshImmediately);}
+        static void clear_status_2(bool refreshImmediately = true) {clear_bar(24, refreshImmediately);}
+
+        static void printDistanceMap(const std::array<std::array<int, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &distanceMap);
 
 
         static void render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &grid, bool is_fog_on = false);
