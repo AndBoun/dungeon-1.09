@@ -179,12 +179,15 @@ private:
     // void init_fog_grid();
     void reset_fog_grid(); // reset to original grid, then update fog grid
 
-
     NPC* pickRandomNPC();
     Item* pickRandomItem();
     bool placeItemRandomly(Item *item);
 
     bool pickUpItem(Character &character);
+
+    // Only NPCs should dispace other NPCs, not the PC
+    bool displaceNPC(NPC *npc);
+    void swapNPCs(NPC *npc1, NPC *npc2);
 };
 
 #endif // DUNGEON_HPP

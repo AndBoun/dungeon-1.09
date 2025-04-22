@@ -52,6 +52,9 @@ public:
     // char symbol; declared in character
     int rrty;
 
+    int bonusSpeed = 0; // Bonus speed
+    int bonusDam = 0; // Bonus damage
+
     
 
 

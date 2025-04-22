@@ -29,6 +29,33 @@ bool Dungeon::killPC(){
     return true;
 }
 
+bool Dungeon::displaceNPC(NPC *npc){
+    Point p;
+
+    int maxAttempts = 150;
+
+    // Get a random position, until an empty spot is found, or the same position is returned
+    do {
+        // A displacement cannot cause a tunneling move, pass 0 to avoid tunneling
+        p = get_next_random_move(npc->getPosition().getX(), npc->getPosition().getY(), 0);
+    } while ( (getNPCID(p.getX(), p.getY()) != -1 || p == npc->getPosition()) && maxAttempts-- > 0);
+
+
+    if ((p.getX() == npc->getPosition().getX() && p.getY() == npc->getPosition().getY()) || maxAttempts <= 0){
+        // No valid moves, return false to swap positions
+        return false;
+    }
+
+    npc->setPosition(p);
+    return true;
+}
+
+void Dungeon::swapNPCs(NPC *npc1, NPC *npc2){
+    Point temp = npc1->getPosition();
+    npc1->setPosition(npc2->getPosition());
+    npc2->setPosition(temp);
+}
+
 bool Dungeon:: hasLineOfSight(int x, int y) {
     int pc_x = getPC().getPosition().getX();
     int pc_y = getPC().getPosition().getY();
@@ -290,7 +317,7 @@ int Dungeon:: move_non_tunnel(NPC *npc, int new_x, int new_y){
     // Check if the new cell is occupied, and kill the occupant
     int occupantID = getNPCID(new_x, new_y);
     if (occupantID != -1) {
-        killNPC(new_x, new_y);
+        if (!displaceNPC(npcs[occupantID]) && npcs[occupantID]->position != pc.position) swapNPCs(npc, npcs[occupantID]);
     } else if (pc.getPosition() == Point(new_x, new_y)) {
         killPC();
     }
@@ -311,7 +338,7 @@ int Dungeon:: move_tunnel(NPC *npc, int new_x, int new_y){
     ){
         // kill player, should only occur if player teleports into rock
         if (pc.getPosition() == Point(new_x, new_y)){
-            pc.setAlive(false);
+            killPC();
         }
 
         modifyGrid()[new_y][new_x].setHardness(0);
