@@ -132,8 +132,10 @@ public:
     int startGameplay(int numNPCs = DEFAULT_NUM_MONSTERS);
     int movePC(int x, int y, bool teleport = false);
     bool moveNPC(NPC *npc);
+    bool killNPC(Point p) { return killNPC(p.getX(), p.getY()); }
     bool killNPC(int x, int y);
     bool killPC();
+    bool attackCharacter(Character *c, int damage, Character *attacker);
     
     void resetDungeon();
 

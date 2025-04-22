@@ -98,6 +98,7 @@ int Dungeon::startGameplay(int numNPCS){
         if (entity_id == PLAYER_ID) { // Player's turn
 
             update_fog_grid(); // Update the fog of war
+            ui::render_pc_status(*this); // Render the player's status
         
             if (getFogStatus()) {
                 ui::render_grid((*this), getFog(), true); // Render the fog grid

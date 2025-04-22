@@ -55,26 +55,7 @@ void ui::destroy_ncurses() {
     endwin();
 }
 
-void ui::render_top_bar(int color_id, const char *format, ...) {
-    char message[100];
-    va_list args;
-    
-    // Format the string with the variable arguments
-    va_start(args, format);
-    vsnprintf(message, sizeof(message), format, args);
-    va_end(args);
-    
-    // Clear the top bar
-    move(0, 0);
-    clrtoeol();
-    
-    // Set color and print message
-    attron(COLOR_PAIR(color_id));
-    mvprintw(0, (DUNGEON_WIDTH - strlen(message)) / 2, "%s", message);
-    attroff(COLOR_PAIR(color_id));
-    
-    refresh();
-}
+
 
 void ui::render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &grid, bool is_fog_on) {
 
@@ -134,14 +115,14 @@ void ui::render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON
 
 // Render game over message
 void ui::render_game_over(Dungeon &d) {
-    clear();
+    // clear();
     
     render_grid(d, d.getGrid()); // Render the grid without fog
     
     if (!d.getPC().isAlive()) {
-        render_top_bar(COLOR_ERROR_ID, "Player Died, press 'q' to quit");
+        // render_top_bar(COLOR_ERROR_ID, "Player Died, press 'q' to quit");
     } else if (d.getNumMonsters() == 0) {
-        render_top_bar(COLOR_SUCCESS_ID, "All Monsters are Dead, press 'q' to quit");
+        render_top_bar(COLOR_SUCCESS_ID, "BOSS Killed, press 'q' to quit");
     }
     
     
@@ -270,11 +251,11 @@ int ui::get_input(Dungeon &d) {
 int ui::handle_player_movement(Dungeon &d, int x, int y) {
 
     // Avoid \t to keep centering of top bar message
-    render_top_bar(
-        COLOR_DEFAULT_ID,
-        "Player Previously at: (%d, %d)          Player Currently At: (%d, %d)",
-        d.getPC().getPosition().getX(), d.getPC().getPosition().getY(), x, y
-    );
+    // render_top_bar(
+    //     COLOR_DEFAULT_ID,
+    //     "Player Previously at: (%d, %d)          Player Currently At: (%d, %d)",
+    //     d.getPC().getPosition().getX(), d.getPC().getPosition().getY(), x, y
+    // );
 
     int move_result = d.movePC(x, y);
     

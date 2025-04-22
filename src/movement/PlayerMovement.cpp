@@ -4,6 +4,7 @@
 
 #include <dungeon/Dungeon.hpp>
 #include <pathfinding/Dijkstras.hpp>
+#include <ui/ui.hpp>
 
 int Dungeon:: movePC(int x, int y, bool teleport){
 
@@ -42,8 +43,23 @@ int Dungeon:: movePC(int x, int y, bool teleport){
 
     // Check if the new cell is occupied, and kill the occupant
     if (getNPCID(x, y) != -1){
+
+        if (teleport) return 0; // teleport to a monster, invalid move
+
         // printf("Player killed a monster: %c\n", d->grid[y][x].type);
-        killNPC(x, y);
+        // killNPC(x, y);
+
+        int dam = getPC().dice_dam.getRandNum();
+        int npc_id = getNPCID(x, y);
+        attackCharacter(getNPCs()[npc_id], dam, &getPC());
+        // ui::render_top_bar(
+        //     COLOR_DEFAULT_ID,
+        //     "PC attacked a monster: %c     with damage: %d",
+        //     getNPCs()[getNPCID(x, y)]->symbol,
+        //     dam
+        // );
+
+        return 1;
     }
 
     // printf("Player moved from (%d, %d) to (%d, %d)\n", d->pc.x, d->pc.y, x, y);

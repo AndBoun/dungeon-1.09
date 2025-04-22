@@ -43,7 +43,7 @@ bool ui::teleport(Dungeon &d){
                 do {
                     x = rand() % DUNGEON_WIDTH;
                     y = rand() % DUNGEON_HEIGHT;
-                } while (d.getGrid()[y][x].getHardness() == MAX_HARDNESS);
+                } while (d.getGrid()[y][x].getHardness() == MAX_HARDNESS && d.getNPCID(x, y) == -1);
 
                 d.movePC(x, y, true);
                 result = 1;

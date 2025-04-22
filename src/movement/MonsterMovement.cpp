@@ -38,10 +38,11 @@ bool Dungeon::displaceNPC(NPC *npc){
     do {
         // A displacement cannot cause a tunneling move, pass 0 to avoid tunneling
         p = get_next_random_move(npc->getPosition().getX(), npc->getPosition().getY(), 0);
-    } while ( (getNPCID(p.getX(), p.getY()) != -1 || p == npc->getPosition()) && maxAttempts-- > 0);
+    } while ( (getNPCID(p.getX(), p.getY()) != -1 || p == pc.position) && maxAttempts-- > 0);
 
-
-    if ((p.getX() == npc->getPosition().getX() && p.getY() == npc->getPosition().getY()) || maxAttempts <= 0){
+    // If getting a random position failed, returns with teh current position of the NPC,
+    // Then there is no available spaces
+    if (maxAttempts <= 0 || p == npc->getPosition()){
         // No valid moves, return false to swap positions
         return false;
     }
@@ -319,7 +320,9 @@ int Dungeon:: move_non_tunnel(NPC *npc, int new_x, int new_y){
     if (occupantID != -1) {
         if (!displaceNPC(npcs[occupantID]) && npcs[occupantID]->position != pc.position) swapNPCs(npc, npcs[occupantID]);
     } else if (pc.getPosition() == Point(new_x, new_y)) {
-        killPC();
+        // killPC();
+        attackCharacter(&pc, npc->dice_dam.getRandNum(), npc);
+        return 1;
     }
 
     npc->setPosition(Point(new_x, new_y)); // update the monster position

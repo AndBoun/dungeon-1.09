@@ -21,6 +21,9 @@ class ui {
         // Private member variables if needed
         static int handle_player_movement(Dungeon &d, int x, int y);
         static int print_monster_list(Dungeon &d, NPC alive[], int scroll);
+
+        // helper for render_centered_line
+        // static void render_centered_line_v(int line, int color_id, const char *format, va_list args);
         
 
     public:
@@ -32,11 +35,23 @@ class ui {
         static void init_ncurses();
         static void destroy_ncurses();
         
-        // Rendering methods
-        static void render_top_bar(int color_id, const char *format, ...);
+        // Rendering status methods
+        static void render_centered_line(int line, int color_id, const char *format, ...);
+        static void render_pc_status(Dungeon &d);
+
+        // Render status bars overloads
+        template<typename... Args>
+        static void render_top_bar(int color_id, const char *format, Args&&... args) {render_centered_line(0, color_id, format, std::forward<Args>(args)...);}
+
+        template<typename... Args>
+        static void render_status_1(int color_id, const char *format, Args&&... args) {render_centered_line(23, color_id, format, std::forward<Args>(args)...);}
+
+        template<typename... Args>
+        static void render_status_2(int color_id, const char *format, Args&&... args) {render_centered_line(24, color_id, format, std::forward<Args>(args)...);}
+
+
         static void render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &grid, bool is_fog_on = false);
         static void render_game_over(Dungeon &d);
-        // static void render_fog_grid(Dungeon &d);
         static bool teleport(Dungeon &d);
         
         // Input handling
