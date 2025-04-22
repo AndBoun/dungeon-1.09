@@ -12,12 +12,15 @@
 class Character
 {
 public:
+    int hp; // Hit points
     Point position; // Position of the character
     int speed;
     // Cell currentCell; // Current cell character is in
     char symbol; // Symbol to represent the character
     bool alive;
     int ID;
+
+    Dice dice_dam;
 
     std::vector<Item*> items;
 

@@ -8,6 +8,8 @@ NPC* NPCDescription::createNPC(NPCDescription &npcDesc, int ID, int descID){
     std::vector<int> color;
 
 	NPC *npc = new NPC();
+    npc->name = npcDesc.name;
+    npc->desc = npcDesc.desc;
     npc->alive = true;
     npc->ID = ID;
     npc->descID = descID;

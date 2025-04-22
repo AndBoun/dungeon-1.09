@@ -42,13 +42,13 @@ public:
 
     int descID; //used to identify the monster from the description file
 
-    // std::string name;
-    // std::string desc;
+    std::string name;
+    std::string desc;
     std::vector<int> color;
     // int speed; declared in character
     // std::vector<std::string> abil; declared with above ints
-    int hp;
-    Dice dice_dam;
+    // int hp; declared in character
+    // Dice dice_dam;
     // char symbol; declared in character
     int rrty;
 

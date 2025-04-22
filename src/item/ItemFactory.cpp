@@ -11,6 +11,8 @@ Item *ItemDescription::createItem(ItemDescription &itemDesc, int ID, int descID)
     Item *item = new Item();
 
     item->pos = Point(0, 0); // Initialize position to (0, 0)
+    item->name = itemDesc.name;
+    item->desc = itemDesc.desc;
 
     auto it = validColorsMap.find(itemDesc.color);
     item->color = it->second;

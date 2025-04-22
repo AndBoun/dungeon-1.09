@@ -16,8 +16,8 @@ class Item
 {
 public:
     Point pos;
-    // std::string name;
-    // std::string desc;
+    std::string name;
+    std::string desc;
     std::string type;
     int color;
     int hit;
