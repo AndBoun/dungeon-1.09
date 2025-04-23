@@ -8,7 +8,7 @@ void ui::render_inventory(Dungeon &d)
 {
     clear();
 
-    render_top_bar(COLOR_DEFAULT_ID, "In Inventory, press 'q' or ESC to exit");
+    render_top_bar(COLOR_PLAYER_ID, "In Inventory, press 'q' or ESC to exit");
 
     mvprintw(2, 0, "Weapon: %s", Item::print_name_symbol(d.pc.weapon_slot).c_str());
     mvprintw(3, 0, "Offhand: %s", Item::print_name_symbol(d.pc.offhand_slot).c_str());
@@ -51,7 +51,7 @@ void ui::render_equipment(Dungeon &d)
     int size = d.getPC().items.size();
     int i = 0;
 
-    render_top_bar(COLOR_DEFAULT_ID, "In Equipment View, press 'q' or ESC to exit");
+    render_top_bar(COLOR_PLAYER_ID, "In Equipment View, press 'q' or ESC to exit");
 
     int line = 2; // starting line
     for (; i < size; i++)
@@ -126,7 +126,7 @@ void ui::inspect_item(Dungeon &d)
 
     int scroll = 0;
     clear();
-    render_top_bar(COLOR_WARNING_ID, "In Item Inspection Mode, press 'q' or ESC to exit");
+    render_top_bar(COLOR_PLAYER_ID, "In Item Inspection Mode, press 'q' or ESC to exit");
     render_scrollable_list(2, 24, scroll, display_list);
     while (true)
     {

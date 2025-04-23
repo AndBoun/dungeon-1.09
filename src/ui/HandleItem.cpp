@@ -5,7 +5,7 @@
 #include <ui/ui.hpp>
 
 void ui::expunge_item(Dungeon &d){
-    render_top_bar(COLOR_WARNING_ID, "Expunge");
+    render_top_bar(COLOR_PLAYER_ID, "Expunge");
     Item *item = get_item_from_inventory(d);
     if (item == nullptr){ return; }
 
@@ -29,7 +29,7 @@ void ui::expunge_item(Dungeon &d){
 }
 
 void ui::drop_item(Dungeon &d){
-    render_top_bar(COLOR_WARNING_ID, "Drop");
+    render_top_bar(COLOR_PLAYER_ID, "Drop");
     Item *item = get_item_from_inventory(d);
     if (item == nullptr){ return; }
 
@@ -51,7 +51,7 @@ void ui::drop_item(Dungeon &d){
 }
 
 void ui::wear_item(Dungeon &d) {
-    render_top_bar(COLOR_WARNING_ID, "Wear");
+    render_top_bar(COLOR_PLAYER_ID, "Wear");
     Item *item = get_item_from_inventory(d);
     if (item == nullptr){ return; }
 
@@ -120,7 +120,7 @@ void ui::wear_item(Dungeon &d) {
 }
 
 void ui::take_off_item(Dungeon &d){
-    render_top_bar(COLOR_WARNING_ID, "Take Off");
+    render_top_bar(COLOR_PLAYER_ID, "Take Off");
     Item *item = get_item_from_equipment(d);
     if (item == nullptr){ return; }
 
