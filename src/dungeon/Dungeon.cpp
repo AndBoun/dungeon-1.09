@@ -103,7 +103,7 @@ int Dungeon::startGameplay(int numNPCS){
         true
     );
 
-    while (getPC().isAlive() && numMonsterAlive > 0) {
+    while (getPC().isAlive() && /*numMonsterAlive > 0*/ isBossAlive) {
 
         int entity_id = pq_get_min_key(pq);
         int current_time = pq_get_priority(pq, entity_id);

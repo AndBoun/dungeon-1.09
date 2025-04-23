@@ -15,11 +15,6 @@ bool ui::displayMonsterInfo(Dungeon &d, Point p){
     std::string desc = d.npcs[npc_id]->desc;
 
     render_top_bar(COLOR_PLAYER_ID, "Viewing Monster Info, press 'esc' or 'q' to exit");
-    // mvprintw(2, 0, "Name: %s", d.npcs[npc_id]->name.c_str());
-    // mvprintw(3, 0, "Symbol: %c", d.npcs[npc_id]->symbol);
-    // mvprintw(4, 0, "HP: %d", d.npcs[npc_id]->hp);
-    // mvprintw(5, 0, "Speed: %d", d.npcs[npc_id]->speed);
-    // mvprintw(6, 0, "Position: (%d, %d)", p.getX(), p.getY());
 
     display_list.push_back("Name: " + d.npcs[npc_id]->name);
     display_list.push_back("Symbol: " + std::string(1, d.npcs[npc_id]->symbol));
@@ -36,33 +31,24 @@ bool ui::displayMonsterInfo(Dungeon &d, Point p){
             abilities += ", " + d.npcDescList[desc_id].abil[i];
         }
     }
-    // mvprintw(7, 0, "Abilities: %s", abilities.c_str());
     display_list.push_back("Abilities: " + abilities);
 
     Dice dice = d.npcs[npc_id]->dice_dam;
-    // mvprintw(8, 0, "Damage: %d+%dd%d", dice.base, dice.numDice, dice.numSides);
     display_list.push_back("Damage: " + std::to_string(dice.base) + "+" + std::to_string(dice.numDice) + "d" + std::to_string(dice.numSides));
 
-    // mvprintw(9, 0, "Rarity: %d", d.npcs[npc_id]->rrty);
     display_list.push_back("Rarity: " + std::to_string(d.npcs[npc_id]->rrty));
-
-    // int y_pos = 11;
     display_list.push_back(""); // Empty line for spacing
 
     // Process description text into lines
     std::string current_line;
     for (size_t i = 0; i < desc.length(); i++) {
         if (current_line.length() >= 78 || desc[i] == '\n') {
-            // Print line and move to next
-            // mvprintw(y_pos++, 0, "%s", current_line.c_str());
             display_list.push_back(current_line);
             current_line.clear();
         } else {
             current_line += desc[i];
         }
     }
-
-    // refresh();
     
     int scroll = 0;
     render_scrollable_list(2, 24, scroll, display_list);

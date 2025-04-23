@@ -55,6 +55,7 @@ public:
 
     int ID;
     int descID;
+    bool inInventory = false; // Flag to indicate if the item is in the inventory
 
     Item();
     Item(std::string type, int color,
@@ -62,8 +63,14 @@ public:
          int attr, int val, bool art, int rrty);
     ~Item();
 
-
-
+    static std::string print_name_symbol(Item *item){
+        if (item == nullptr) {
+            return "EMPTY";
+        }
+        std::string name = item->name;
+        char symbol = item->symbol;
+        return name + " (" + symbol + ")";
+    }
 };
 
 #endif

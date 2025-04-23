@@ -194,6 +194,16 @@ int ui::get_input(Dungeon &d) {
                 }
                 is_dist_map = !is_dist_map; // toggle dist map
                 break;
+            
+            case 'i': // Inventory
+                result = 0; // no movement, run loop again
+                render_inventory(d);
+                break;
+            
+            case 'e': // Equipment
+                result = 0; // no movement, run loop again
+                render_equipment(d);
+                break;
                 
             default:
                 render_top_bar(COLOR_ERROR_ID, "Invalid Input");

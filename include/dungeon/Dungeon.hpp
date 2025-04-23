@@ -79,6 +79,8 @@ public:
     PC pc;
     int numMonsterAlive;
 
+    bool isBossAlive = true; // Flag to indicate if the boss is alive
+
     int numItems = 10;
 
     bool isFog = true; // Flag to indicate if fog of war is enabled
@@ -152,7 +154,7 @@ public:
 
     int getItemID(Point p) const;
 
-
+    bool addToEquipment(PC &character, int itemID);
 
     void update_fog_grid();
 
@@ -185,7 +187,7 @@ private:
     Item* pickRandomItem();
     bool placeItemRandomly(Item *item);
 
-    bool pickUpItem(Character &character);
+    bool pickUpItem(PC &character);
 
     // Only NPCs should dispace other NPCs, not the PC
     bool displaceNPC(NPC *npc);

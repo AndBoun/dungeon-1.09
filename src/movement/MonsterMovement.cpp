@@ -16,9 +16,9 @@ bool Dungeon:: killNPC(int x, int y){
     numMonsterAlive--;
 
     // Disable generation of unique NPCs once killed
-    if (npcs[ID]->unique){
-        npcDescList[npcs[ID]->descID].canBeGenerated = false;
-    }
+    if (npcs[ID]->unique){ npcDescList[npcs[ID]->descID].canBeGenerated = false; }
+
+    if (npcs[ID]->boss){ isBossAlive = false; }
 
     return 0;
 }

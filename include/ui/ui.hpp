@@ -22,6 +22,23 @@ class ui {
         static int handle_player_movement(Dungeon &d, int x, int y);
         static int print_monster_list(Dungeon &d, NPC alive[], int scroll);
 
+        // Print grid based off fog settings
+        static void render_grid_default(Dungeon &d){
+            if (d.getFogStatus()) {
+                render_grid(d, d.getFog(), true); // fog is on
+            } else {
+                render_grid(d, d.getGrid()); // fog is off
+            }
+        }
+
+        static int quit_game(Dungeon &d, int input) {
+            if (input != 'Q') return 0;
+            destroy_ncurses();
+            printf("Game terminated by user\n");
+            exit(0);
+            return 1;
+        }
+
         // helper for render_centered_line
         // static void render_centered_line_v(int line, int color_id, const char *format, va_list args);
         
@@ -64,6 +81,10 @@ class ui {
         static void render_grid(const Dungeon &d, const std::array<std::array<Cell, DUNGEON_WIDTH>, DUNGEON_HEIGHT> &grid, bool is_fog_on = false);
         static void render_game_over(Dungeon &d);
         static bool teleport(Dungeon &d);
+
+        static void render_inventory(Dungeon &d);
+        static void render_equipment(Dungeon &d);
+
         
         // Input handling
         static int get_input(Dungeon &d);
