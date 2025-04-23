@@ -5,15 +5,10 @@
 mkdir ~/.rlg327
 ```
 
-> Files within the `.rlg327` folder are provided from Iowa State University's professor, Jeremy Scheaffer
-
 Build the project:
 ```bash
 make
 ```
-
-Alternatively, use the `.devcontainer` folder to automatically build a development environment in VS Code or GitHub Codespaces. The container configuration
-will automatically copy the `.rlg327` folder into the home directory and build the project. The environment uses a Docker image of the latest stable version of Fedora and installs gcc/g++ and gdb for developing. The environment is meant to emulate Iowa State University's Pyrite server environment.
 
 ## Running configurations
 Run the project:
@@ -26,21 +21,26 @@ Run the project:
 ```plain
 /
 ├── include/
+│   ├── ui
+│   │   └── ui.hpp
 │   ├── character/
-│   │   ├── NPC.hpp
-│   │   └── NPCDescription.hpp
-│   └── item/
-│       ├── Item.hpp
-│       └── ItemDescription.hpp
+│   │   └── pc.hpp
+│   └── dungeon/
+│       └── Dungeon.hpp
 ├── src/
 │   ├── character/
-│   │   └── NPCFactory.cpp
-│   └── dungeon/
-│       ├── DungeonCharacterPlacement.cpp
-│       └── DungeonItemPlacement.cpp
-├── item/
-│       ├── ItemFactory.cpp
-│       └── ItemInteractions.cpp
+│   │   └── PC.cpp
+│   ├── dungeon/
+│   │   └── DungeonCombat.cpp
+│   ├── movement/
+│   │   ├── MonsterMovement.cpp
+│   │   └── PlayerMovement.cpp
+│   └── ui/
+│       ├── HandleItem.cpp
+│       ├── InspectMonster.cpp
+│       ├── ItemSelection.cpp
+│       ├── RenderItems.cpp
+│       └── ScrollableList.cpp
 └── main.cpp
 ```
 
@@ -50,16 +50,15 @@ Run the project:
 - All files and inputs are assumed to be valid
 
 ## Additional Notes
-- No optional features were added for 1.08
+- No optional features were added from 1.08
+- 10 to 20 items are randomly generate per level
+- Players keep their carry and equipment items between levels.
+- Item features for the PC only include bonus speed and damage (as that was listed for 1.09). Other item features (dodge, light radius, etc.) are not implemented.
 - Item pickup only works for the player. Move over items to pick them up.
-- Item and monsters are deleted and regenerated after each level change / stair
-	- Players don't keep their inventory after using stairs
-- The destructor in the classes cleans up dynamically allocated objects
-	- `reset_dungeon()` cleans up dynamically allocated objects explicitly, but doesn't reset everything to prepare to generate a new dungeon. It respects the current ineligible list of objects and monsters.
+- Item stacking isn't explicitly implemented, the game prevents objects from generating on top of each other, but if the player forcefully drops multiple items in the same spot, any of the symbols of that item may appear at that position, and you may pick up at an item at that position as many times as there is an item there.
 
 ## How the Project Runs:
-In `main.cpp`, it creates a dungeon instance, which will set up a description list and generate a random number for the amount of items in a dungeon. Next, it uses `start_gameplay()`. Within `start_gameplay()`, we set up and place NPCs and items around the dungeon with `placeNPCsRandomly()` and `placeItemsRandomly()`. These use the factories (`ItemFactory.cpp` and `NPCFactory.cpp`) to generate their respective objects, then randomly place them within the dungeon (with `DungeonCharacterPlacement.cpp` and `DungeonItemPlacement.cpp`). These keep track of which items can and can't be placed, and if an identical unique NPC or item artifact has already been placed.  When stairs are used, the `reset_dungeon()` method is called to free up allocated space, but it leaves the description lists alone to ensure generation specifications are kept. When the dungeon is destroyed, the allocated space is automatically freed in the deconstructor of `Dungeon.cpp`.
+In `main.cpp`, it creates a dungeon instance, `start_gameplay()` in `Dungeon.cpp`.  When it's a character's turn, `MonsterMovement.cpp` or `PlayerMovement.cpp` will be called. In `MonsterMovement.cpp`, monsters `displaceNPC()` instead of killing each other. When a Monster of Player attacks, they stay in place, and call `attackCharacter()` in `DungeonCombat.cpp`. When it's a player turn to move, in `ui.cpp`, they can use all the new controls.  `ScrollableList.cpp` is a helper function to render a scrollable list based on each string array, where each line is a entry in the array. `RenderItems.cpp` render the equipment and inventory. `ItemSelection.cpp` are helper functions for that allow the player to select a carry or equipment slot for the other functions. `InspectMonster.cpp` handles selecting and inspecting a monster. `HandleItem.cpp` deals with inspecting, expunging, dropping, wearing, and taking off items. You can only win the game by killing a BOSS now. Creating a dungeon without monsters means you can never win the game.
 
 
 # Example Gameplay:
-![Gameplay-1 08](https://github.com/user-attachments/assets/896063c8-cc16-4f01-b569-7ebb3150630e)

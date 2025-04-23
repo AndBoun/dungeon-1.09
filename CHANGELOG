@@ -1,0 +1,101 @@
+commit 9ff3533958e01e17d4dcf4e7c96b09bd0b5c70f9
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 18:41:49 2025 +0000
+
+    Added message when boss it killed, player wins
+
+commit cbd0d84ba477eb6b049542eb80ab578f6eada38b
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 18:34:30 2025 +0000
+
+    Move inspect item into handleitem.cpp.
+
+commit 4fffea4bc5c4961690244a85011a89a66aab9a22
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 09:14:37 2025 +0000
+
+    update header information color for item selection.
+
+commit be347536ad603e0e16300a4be0d799afeee1ec33
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 09:01:18 2025 +0000
+
+    Add header when selecting object and items, to make it clear wheter waking off, wearingn inspecting, etc.
+
+commit b7fc9fb4e60fb4ec9af6c4f4ee21344b5343d01f
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 08:25:29 2025 +0000
+
+    Fix totaling speed and damage dices for pcs.
+
+commit c7436d7793b11b30beda9e473871734c58985bac
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 08:08:22 2025 +0000
+
+    Implement displaying inventory, equipment, inspection. Expunging, droping, and taking off an item.
+
+commit 9971d5c34b66232e527240d1001503a327516f8f
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 03:13:02 2025 +0000
+
+    Maintain inventory and equipment after dungeon resets
+
+commit f8d2b5f2587cbd0f19cfcbb07ce227c40ce09cf0
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Wed Apr 23 02:15:56 2025 +0000
+
+    add inventory, equipment lists. make pick ups correctly function
+
+commit 4fd823b8ed60f6d312d14c7666d01b16e6bd3aa2
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Tue Apr 22 23:55:09 2025 +0000
+
+    Make scrollable list helper method
+
+commit d570274a62035b9bac7eb5e2cb1eb7db77b9b7bd
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Tue Apr 22 05:04:01 2025 -0500
+
+    add gawk to fix container build errors
+
+commit 17cacc43a582411f7f42b0a19bae3df6cf50480a
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Tue Apr 22 09:39:51 2025 +0000
+
+    update ui
+
+commit 8dd35fe457ef069f16897b9e8a963e5526e6ff60
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Tue Apr 22 08:28:04 2025 +0000
+
+    Added monster inspection
+
+commit 41cba989be43deaea0ff0d8f34225341fccb43e8
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Tue Apr 22 07:28:25 2025 +0000
+
+    Implemented damage based combat.
+
+commit 37add41d395db9d37ebeff22b4eecba8c110192f
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Tue Apr 22 01:24:23 2025 +0000
+
+    Implment NPC displacement, prevent NPC from killing each other
+
+commit eb7507d9e61573b38de784879b946d7051a2b78d
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Mon Apr 21 19:24:21 2025 -0500
+
+    Add names and desc to item and NPC class. Add move HP and Damage to Character superclass.
+
+commit cc43c8b563e94060745a82c7e9679ec89c8237ca
+Author: AndBoun <167598896+AndBoun@users.noreply.github.com>
+Date:   Mon Apr 21 03:06:45 2025 -0500
+
+    Add dungeon 1..08
+
+commit 2550de353f2f96d0db94d302dbdf0fe8c1833499
+Author: Andrew Boun <167598896+AndBoun@users.noreply.github.com>
+Date:   Sat Apr 19 23:07:53 2025 -0500
+
+    Initial commit
