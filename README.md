@@ -62,3 +62,17 @@ In `main.cpp`, it creates a dungeon instance, `start_gameplay()` in `Dungeon.cpp
 
 
 # Example Gameplay:
+
+## Inventory and Monster Inspection:
+![Inventory_and_Monster](https://github.com/user-attachments/assets/8acca72f-0ba7-45e3-b566-57d4489b9b0d)
+
+## Player Attack:
+![Player_Attack](https://github.com/user-attachments/assets/67a0bd0b-e42c-42b4-8917-6d3528cca52f)
+
+## Monster Attack:
+![Monster_Attack](https://github.com/user-attachments/assets/6a3ae09a-0ad3-4e01-968a-925c9f099a1b)
+
+## Boss Fight:
+![Boss_Fight](https://github.com/user-attachments/assets/48be1ad4-8ea0-4380-8bc5-d2631a5f08ee)
+
+
