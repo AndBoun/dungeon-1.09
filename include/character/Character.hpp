@@ -37,6 +37,9 @@ public:
     // virtual const Cell& getCurrentCell() const;
     virtual char getSymbol() const;
     virtual bool isAlive() const;
+    virtual int getDamage() {
+        return dice_dam.getRandNum();
+    }
 
     // Setters
     virtual void setPosition(Point position);

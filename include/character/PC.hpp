@@ -25,11 +25,30 @@ public:
     Item *light_slot = nullptr;
     Item *ring_slot_1 = nullptr;
     Item *ring_slot_2 = nullptr;
+    const std::vector<Item*> equipment = {
+        weapon_slot,
+        offhand_slot,
+        range_slot,
+        armor_slot,
+        helmet_slot,
+        cloak_slot,
+        gloves_slot,
+        boots_slot,
+        amulet_slot,
+        light_slot,
+        ring_slot_1,
+        ring_slot_2
+    };
+
+    std::vector<Dice> damDices = {};
 
 
     PC();
     PC(Point position);
     ~PC();
+
+    void updatePCAttributes();
+    int getDamage() override;
 };
 
 #endif

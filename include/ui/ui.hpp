@@ -84,6 +84,8 @@ class ui {
 
         static void render_inventory(Dungeon &d);
         static void render_equipment(Dungeon &d);
+        
+        static void inspect_item(Dungeon &d);
 
         
         // Input handling
@@ -92,7 +94,13 @@ class ui {
         static bool selectMonster(Dungeon &d);
         static bool displayMonsterInfo(Dungeon &d, Point p);
 
-        static Item* get_item_from_input(Dungeon &d, int input);
+        static Item* get_item_from_equipment(Dungeon &d);
+        static Item *get_item_from_inventory(Dungeon &d);
+
+        static void expunge_item(Dungeon &d);
+        static void drop_item(Dungeon &d);
+        static void wear_item(Dungeon &d);
+        static void take_off_item(Dungeon &d);
 
 
 
@@ -100,4 +108,4 @@ class ui {
         static void init_item_colors(std::vector<Item*> items);
 };
 
-#endif // NCURSES_UI_HPP
+#endif //UI_HPP

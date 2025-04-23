@@ -49,9 +49,9 @@ int Dungeon:: movePC(int x, int y, bool teleport){
         // printf("Player killed a monster: %c\n", d->grid[y][x].type);
         // killNPC(x, y);
 
-        int dam = getPC().dice_dam.getRandNum();
+        // int dam = getPC().dice_dam.getRandNum();
         int npc_id = getNPCID(x, y);
-        attackCharacter(getNPCs()[npc_id], dam, &getPC());
+        attackCharacter(getNPCs()[npc_id], pc.getDamage(), &getPC());
         // ui::render_top_bar(
         //     COLOR_DEFAULT_ID,
         //     "PC attacked a monster: %c     with damage: %d",

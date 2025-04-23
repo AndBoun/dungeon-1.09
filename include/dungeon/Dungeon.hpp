@@ -192,6 +192,9 @@ private:
     // Only NPCs should dispace other NPCs, not the PC
     bool displaceNPC(NPC *npc);
     void swapNPCs(NPC *npc1, NPC *npc2);
+
+
+
 };
 
 #endif // DUNGEON_HPP

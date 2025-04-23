@@ -93,6 +93,7 @@ bool Dungeon::addToEquipment(PC &character, int itemID){
 
     items[itemID]->inInventory = true; // Mark item as in inventory
     items[itemID]->pos = Point(-1, -1); // Remove item from the dungeon
+    character.updatePCAttributes();
 
     ui::render_top_bar(
         COLOR_SUCCESS_ID,

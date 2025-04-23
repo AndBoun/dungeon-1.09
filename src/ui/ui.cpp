@@ -204,6 +204,31 @@ int ui::get_input(Dungeon &d) {
                 result = 0; // no movement, run loop again
                 render_equipment(d);
                 break;
+            
+            case 'I': // Inspect item
+                result = 0; // no movement, run loop again
+                inspect_item(d);
+                break;
+
+            case 'x': // Expunge item
+                result = 0; // no movement, run loop again
+                expunge_item(d);
+                break;
+                
+            case 'd': // Drop item
+                result = 0; // no movement, run loop again
+                drop_item(d);
+                break;   
+
+            case 't': // Take off item
+                result = 0; // no movement, run loop again
+                take_off_item(d);
+                break;
+            
+            case 'w': // Wear item
+                result = 0; // no movement, run loop again
+                wear_item(d);
+                break;
                 
             default:
                 render_top_bar(COLOR_ERROR_ID, "Invalid Input");

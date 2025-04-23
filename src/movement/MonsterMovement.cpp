@@ -321,7 +321,7 @@ int Dungeon:: move_non_tunnel(NPC *npc, int new_x, int new_y){
         if (!displaceNPC(npcs[occupantID]) && npcs[occupantID]->position != pc.position) swapNPCs(npc, npcs[occupantID]);
     } else if (pc.getPosition() == Point(new_x, new_y)) {
         // killPC();
-        attackCharacter(&pc, npc->dice_dam.getRandNum(), npc);
+        attackCharacter(&pc, npc->getDamage(), npc);
         return 1;
     }
 
