@@ -4,6 +4,85 @@
 
 #include <ui/ui.hpp>
 
+void ui::inspect_item(Dungeon &d)
+{
+
+    Item *item = get_item_from_inventory(d);
+
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    Dice dice = item->dice_dam;
+
+    std::vector<std::string> display_list = {
+        "Name: " + item->name,
+        "Type: " + item->type,
+        "Symbol: " + std::string(1, item->symbol),
+        "Hit: " + std::to_string(item->hit),
+        "Damage: " + std::to_string(dice.base) + "+" + std::to_string(dice.numDice) + "d" + std::to_string(dice.numSides),
+        "Dodge: " + std::to_string(item->dodge),
+        "Defense: " + std::to_string(item->def),
+        "Weight: " + std::to_string(item->weight),
+        "Speed: " + std::to_string(item->speed),
+        "Attribute: " + std::to_string(item->attr),
+        "Value: " + std::to_string(item->val),
+        "Art: " + std::to_string(item->art),
+        "Rarity: " + std::to_string(item->rrty),
+        "" // Empty line for spacing
+    };
+
+    // Process description text into lines
+    std::string desc = item->desc;
+    std::string current_line;
+    for (size_t i = 0; i < desc.length(); i++)
+    {
+        if (current_line.length() >= 78 || desc[i] == '\n')
+        {
+            display_list.push_back(current_line);
+            current_line.clear();
+        }
+        else
+        {
+            current_line += desc[i];
+        }
+    }
+
+    int scroll = 0;
+    clear();
+    render_top_bar(COLOR_PLAYER_ID, "In Item Inspection Mode, press 'q' or ESC to exit");
+    render_scrollable_list(2, 24, scroll, display_list);
+    while (true)
+    {
+        timeout(-1);
+        int input = getch();
+
+        if (input == KEY_UP)
+        {
+            scroll = render_scrollable_list(2, 24, --scroll, display_list);
+        }
+        else if (input == KEY_DOWN)
+        {
+            scroll = render_scrollable_list(2, 24, ++scroll, display_list);
+        }
+
+        if (input == 'q' || input == 27 || input == 'I')
+        {
+            // Clear the screen and return to the main menu
+            clear();
+            render_grid_default(d);
+
+            render_top_bar(COLOR_SUCCESS_ID, "Exited item inspection mode");
+            break;
+        }
+
+        quit_game(d, input);
+    }
+
+    return;
+}
+
 void ui::expunge_item(Dungeon &d){
     render_top_bar(COLOR_PLAYER_ID, "Expunge");
     Item *item = get_item_from_inventory(d);
@@ -55,7 +134,7 @@ void ui::wear_item(Dungeon &d) {
     Item *item = get_item_from_inventory(d);
     if (item == nullptr){ return; }
 
-    int inventory_id; //get inventory id of item
+    int inventory_id = 0; //get inventory id of item
     for (size_t i = 0; i < d.getPC().items.size(); i++){
         if (d.pc.items[i]->ID == item->ID){
             inventory_id = i;

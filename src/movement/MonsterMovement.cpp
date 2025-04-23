@@ -341,7 +341,8 @@ int Dungeon:: move_tunnel(NPC *npc, int new_x, int new_y){
     ){
         // kill player, should only occur if player teleports into rock
         if (pc.getPosition() == Point(new_x, new_y)){
-            killPC();
+            attackCharacter(&pc, npc->getDamage(), npc);
+            return 0;
         }
 
         modifyGrid()[new_y][new_x].setHardness(0);
