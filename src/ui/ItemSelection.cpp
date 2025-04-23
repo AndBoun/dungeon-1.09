@@ -6,9 +6,12 @@
 
 Item *ui::get_item_from_equipment(Dungeon &d)
 {
-    clear();
+    for (int line = 1; line < 24; line++){
+        move(line, 0);
+        clrtoeol();
+    }
 
-    render_top_bar(COLOR_DEFAULT_ID, "Select an item (a-l) or press 'q' or ESC to cancel");
+    render_centered_line(1, COLOR_DEFAULT_ID, "Select an item (a-l) or press 'q' or ESC to cancel");
 
     render_centered_line(
         12, 
@@ -103,6 +106,7 @@ Item *ui::get_item_from_equipment(Dungeon &d)
         if (item == nullptr)
         {
             render_top_bar(COLOR_ERROR_ID, "No Item to Inspect in this slot");
+            isValidInput = false;
             continue;
         }
     }
@@ -118,9 +122,12 @@ Item *ui::get_item_from_equipment(Dungeon &d)
 
 Item *ui::get_item_from_inventory(Dungeon &d)
 {
-    clear();
+    for (int line = 1; line < 24; line++){
+        move(line, 0);
+        clrtoeol();
+    }
 
-    render_top_bar(COLOR_DEFAULT_ID, "Select an item (0-9) or press 'q' or ESC to cancel");
+    render_centered_line(1, COLOR_DEFAULT_ID, "Select an item (0-9) or press 'q' or ESC to cancel");
 
     render_centered_line(
         12, 
@@ -205,6 +212,7 @@ Item *ui::get_item_from_inventory(Dungeon &d)
         if (item == nullptr)
         {
             render_top_bar(COLOR_ERROR_ID, "No Item to Inspect in this slot");
+            isValidInput = false;
             continue;
         }
     }
