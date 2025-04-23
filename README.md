@@ -51,6 +51,7 @@ Run the project:
 
 ## Additional Notes
 - No optional features were added from 1.08
+- If descriptions are not fully on the screen when inspecting items or monsters, scroll using up and down arrow
 - 10 to 20 items are randomly generate per level
 - Players keep their carry and equipment items between levels.
 - Item features for the PC only include bonus speed and damage (as that was listed for 1.09). Other item features (dodge, light radius, etc.) are not implemented.
