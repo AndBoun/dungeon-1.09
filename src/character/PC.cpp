@@ -13,7 +13,7 @@ void PC::updatePCAttributes() {
     speed = 10;
     damDices.clear();
     
-    for (auto& item : equipment) {
+    for (auto& item : get_equipment()) {
         if (item != nullptr) {
             speed += item->speed;
 
