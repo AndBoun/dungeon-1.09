@@ -35,20 +35,29 @@ void Dungeon::resetDungeon()
         if (npcs[i] != nullptr) delete npcs[i];
         npcs[i] = nullptr;
     }
-    // Free items
+
+    // Free items that are not in the inventory
     for (size_t i = 0; i < items.size(); i++){
-        if (items[i] != nullptr) delete items[i];
-        items[i] = nullptr;
+        if (items[i] != nullptr && !items[i]->inInventory){
+            delete items[i];  
+            items[i] = nullptr;
+            items.erase(items.begin() + i);
+        } 
     }
 
-    // Clear rooms, stairs, and NPCs
+    // Reset item IDs
+    for (size_t i = 0; i < items.size(); i++){
+        items[i]->ID = i; // Reset item ID
+    }
+
+    // Clear rooms, stairs, and NPCs 
     reset_fog_grid(); // Reset the fog grid
     rooms.clear();
     up_stairs.clear();
     down_stairs.clear();
     npcs.clear();
-    items.clear();
-    pc.items.clear(); // Clear the player's items
+    // items.clear();
+    // pc.items.clear(); // Clear the player's items
     generateRandomDungeon(); // Regenerate the dungeon
 }
 

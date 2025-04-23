@@ -22,6 +22,7 @@ public:
     Item *gloves_slot = nullptr;
     Item *boots_slot = nullptr;
     Item *amulet_slot = nullptr;   
+    Item *light_slot = nullptr;
     Item *ring_slot_1 = nullptr;
     Item *ring_slot_2 = nullptr;
 

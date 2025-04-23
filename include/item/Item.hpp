@@ -53,7 +53,7 @@ public:
     int rrty;
     char symbol;
 
-    int ID;
+    int ID; // id in array of items in dungeon
     int descID;
     bool inInventory = false; // Flag to indicate if the item is in the inventory
 

@@ -92,6 +92,10 @@ class ui {
         static bool selectMonster(Dungeon &d);
         static bool displayMonsterInfo(Dungeon &d, Point p);
 
+        static Item* get_item_from_input(Dungeon &d, int input);
+
+
+
         static void init_NPC_colors(std::vector<NPC*> npcs);
         static void init_item_colors(std::vector<Item*> items);
 };

@@ -50,11 +50,11 @@ void ui::render_equipment(Dungeon &d){
 
     int line = 2; //starting line
     for (; i < size; i++){
-        mvprintw(line++, 0, "Slot %d : %s", i + 1, Item::print_name_symbol(d.getPC().items[i]).c_str());
+        mvprintw(line++, 0, "Slot %d : %s", i, Item::print_name_symbol(d.getPC().items[i]).c_str());
     }
 
     for (; i < 10 /* max inventory size*/; i++){
-        mvprintw(line++, 0, "Slot %d : EMPTY", i + 1);
+        mvprintw(line++, 0, "Slot %d : EMPTY", i);
     }
 
     refresh();
@@ -69,4 +69,25 @@ void ui::render_equipment(Dungeon &d){
 
     clear_top_bar();
     render_grid_default(d);
+} 
+
+Item* ui::get_item_from_input(Dungeon &d, int input){
+
+    switch (input) {
+        case 'a': return d.pc.weapon_slot;
+        case 'b': return d.pc.offhand_slot;
+        case 'c': return d.pc.range_slot;
+        case 'd': return d.pc.armor_slot;
+        case 'e': return d.pc.helmet_slot;
+        case 'f': return d.pc.cloak_slot;
+        case 'g': return d.pc.gloves_slot;
+        case 'h': return d.pc.boots_slot;
+        case 'i': return d.pc.amulet_slot;
+        case 'j': return d.pc.light_slot;
+        case 'k': return d.pc.ring_slot_1;
+        case 'l': return d.pc.ring_slot_2;
+        default: break;
+    }
+
+    return nullptr;
 }

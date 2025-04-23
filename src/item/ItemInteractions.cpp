@@ -15,8 +15,6 @@ bool Dungeon::pickUpItem(PC &character){
 
     if (character.symbol == PLAYER){
 
-
-
         if (!addToEquipment(character, itemID) && character.items.size() < 10) {
             character.items.push_back(items[itemID]);
         }
@@ -48,32 +46,35 @@ bool Dungeon::addToEquipment(PC &character, int itemID){
 
     std::string type = items[itemID]->type;
 
-    if (type == WEAPON) {
+    if (type == WEAPON && pc.weapon_slot == nullptr) {
         character.weapon_slot = items[itemID];
     }
-    else if (type == OFFHAND) {
+    else if (type == OFFHAND && pc.offhand_slot == nullptr) {
         character.offhand_slot = items[itemID];
     }
-    else if (type == RANGED) {
+    else if (type == RANGED && pc.range_slot == nullptr) {
         character.range_slot = items[itemID];
     }
-    else if (type == ARMOR) {
+    else if (type == ARMOR && pc.armor_slot == nullptr) {
         character.armor_slot = items[itemID];
     }
-    else if (type == HELMET) {
+    else if (type == HELMET && pc.helmet_slot == nullptr) {
         character.helmet_slot = items[itemID];
     }
-    else if (type == CLOAK) {
+    else if (type == CLOAK && pc.cloak_slot == nullptr) {
         character.cloak_slot = items[itemID];
     }
-    else if (type == GLOVES) {
+    else if (type == GLOVES && pc.gloves_slot == nullptr) {
         character.gloves_slot = items[itemID];
     }
-    else if (type == BOOTS) {
+    else if (type == BOOTS && pc.boots_slot == nullptr) {
         character.boots_slot = items[itemID];
     }
-    else if (type == AMULET) {
+    else if (type == AMULET && pc.amulet_slot == nullptr) {
         character.amulet_slot = items[itemID];
+    }
+    else if (type == LIGHT && pc.light_slot == nullptr) {
+        character.light_slot = items[itemID];
     }
     else if (type == RING) {
         if (!character.ring_slot_1) {
@@ -91,5 +92,13 @@ bool Dungeon::addToEquipment(PC &character, int itemID){
     }
 
     items[itemID]->inInventory = true; // Mark item as in inventory
+    items[itemID]->pos = Point(-1, -1); // Remove item from the dungeon
+
+    ui::render_top_bar(
+        COLOR_SUCCESS_ID,
+        "Picked up a %s: %c",
+        items[itemID]->type.c_str(),
+        items[itemID]->symbol
+    );
     return true;
 }
