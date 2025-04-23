@@ -15,7 +15,7 @@ void ui::render_game_over(Dungeon &d) {
     
     if (!d.getPC().isAlive()) {
         // render_top_bar(COLOR_ERROR_ID, "Player Died, press 'q' to quit");
-    } else if (d.getNumMonsters() == 0) {
+    } else if (!d.isBossAlive) {
         render_top_bar(COLOR_SUCCESS_ID, "BOSS Killed, press 'q' to quit");
     }
     
