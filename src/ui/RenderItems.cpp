@@ -4,11 +4,11 @@
 
 #include <ui/ui.hpp>
 
-void ui::render_inventory(Dungeon &d)
+void ui::render_equipment(Dungeon &d)
 {
     clear();
 
-    render_top_bar(COLOR_PLAYER_ID, "In Inventory, press 'q' or ESC to exit");
+    render_top_bar(COLOR_PLAYER_ID, "In Equipment View, press 'q' or ESC to exit");
 
     mvprintw(2, 0, "Weapon: %s", Item::print_name_symbol(d.pc.weapon_slot).c_str());
     mvprintw(3, 0, "Offhand: %s", Item::print_name_symbol(d.pc.offhand_slot).c_str());
@@ -38,20 +38,20 @@ void ui::render_inventory(Dungeon &d)
             exit(0);
             break;
         }
-    } while (input != 'q' && input != 'i' && input != 27);
+    } while (input != 'q' && input != 'e' && input != 27);
 
     clear_top_bar();
     render_grid_default(d);
 }
 
-void ui::render_equipment(Dungeon &d)
+void ui::render_inventory(Dungeon &d)
 {
     clear();
 
     int size = d.getPC().items.size();
     int i = 0;
 
-    render_top_bar(COLOR_PLAYER_ID, "In Equipment View, press 'q' or ESC to exit");
+    render_top_bar(COLOR_PLAYER_ID, "In Inventory, press 'q' or ESC to exit");
 
     int line = 2; // starting line
     for (; i < size; i++)
@@ -73,7 +73,7 @@ void ui::render_equipment(Dungeon &d)
         input = getch();
 
         quit_game(d, input);
-    } while (input != 'q' && input != 'e' && input != 27);
+    } while (input != 'q' && input != 'i' && input != 27);
 
     clear_top_bar();
     render_grid_default(d);
