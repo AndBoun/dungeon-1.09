@@ -16,5 +16,5 @@
         }
     },
     
-    "postCreateCommand": "cp -r .rlg327 /root/.rlg327 && make clean && make && echo 'Container setup complete!'"    
+    "postCreateCommand": "cp -r .rlg327 /root/.rlg327 && echo 'Container setup complete!'"    
 }
